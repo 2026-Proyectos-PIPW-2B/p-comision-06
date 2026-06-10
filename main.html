@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Placeholder title</title>
+    <title>GameStore</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css" />
@@ -26,7 +26,10 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="#"> Placeholder name </a>
+        <a class="navbar-brand fw-bold" href="#">
+          <i class="bi bi-controller me-2"></i>
+          GameStore
+        </a>
 
         <button
           class="navbar-toggler"
@@ -40,14 +43,20 @@
         <div class="collapse navbar-collapse" id="menu">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="login.html">
+              <a
+                class="nav-link d-flex align-items-center gap-2"
+                href="login.html"
+              >
                 <i class="bi bi-person-circle"></i>
                 Login
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="carrito.html">
+              <a
+                class="nav-link d-flex align-items-center gap-2"
+                href="carrito.html"
+              >
                 <i class="bi bi-cart3"></i>
                 Carrito
               </a>
@@ -64,7 +73,7 @@
           <!-- IZQUIERDA -->
           <div class="col-lg-4 hero-info">
             <h1 class="display-2 fw-bold mb-4">
-              Tu próxima aventura comienza aquí
+              Tu próxima aventura esta por comenzar
             </h1>
 
             <p class="lead mb-4">
@@ -130,7 +139,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Cyberpunk..."
+                    placeholder="Nombre"
                   />
                 </div>
 
@@ -226,45 +235,134 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer id="footer" class="bg-dark text-white py-4">
+    <!-- NEWSLETTER -->
+    <section class="bg-warning py-5">
       <div class="container">
-        <div class="row text-center text-md-start">
-          <div class="col-md-4 mb-3">
-            <h5>Placeholder nombre</h5>
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h3 class="fw-bold mb-2">No te pierdas ninguna oferta</h3>
 
-            <p>Placeholder descripcion</p>
+            <p class="mb-lg-0">
+              Recibí descuentos, lanzamientos y promociones exclusivas.
+            </p>
           </div>
 
-          <div class="col-md-4 mb-3">
-            <h5>Links</h5>
+          <div class="col-lg-6">
+            <form class="row g-2">
+              <div class="col-md-8">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="tuemail@ejemplo.com"
+                />
+              </div>
+
+              <div class="col-md-4">
+                <button class="btn btn-dark w-100">Suscribirme</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="text-white pt-5 pb-3">
+      <div class="container">
+        <div class="row">
+          <!-- MARCA -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h4 class="fw-bold">
+              <i class="bi bi-controller me-2"></i>
+              GameStore
+            </h4>
+
+            <p class="text-secondary">
+              Tu tienda digital de videojuegos para PC, PlayStation, Xbox y
+              Nintendo.
+            </p>
+          </div>
+
+          <!-- NAVEGACION -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5>Navegación</h5>
 
             <ul class="list-unstyled">
               <li>
-                <a href="#" class="text-white text-decoration-none">Inicio</a>
+                <a href="#inicio" class="footer-link"> Inicio </a>
               </li>
+
               <li>
-                <a href="#" class="text-white text-decoration-none">Items</a>
+                <a href="#catalogo" class="footer-link"> Catálogo </a>
+              </li>
+
+              <li>
+                <a href="login.html" class="footer-link"> Login </a>
+              </li>
+
+              <li>
+                <a href="carrito.html" class="footer-link"> Carrito </a>
               </li>
             </ul>
           </div>
 
-          <div class="col-md-4">
-            <h5>Redes</h5>
+          <!-- CATEGORIAS -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5>Categorías</h5>
 
-            <div
-              class="d-flex gap-3 justify-content-center justify-content-md-start"
-            >
-              <i class="bi bi-instagram fs-4"></i>
-              <i class="bi bi-facebook fs-4"></i>
-              <i class="bi bi-twitter-x fs-4"></i>
+            <ul class="list-unstyled">
+              <li>🎮 Acción</li>
+              <li>⚔️ RPG</li>
+              <li>🔫 Shooter</li>
+              <li>🏎️ Carreras</li>
+              <li>👾 Indie</li>
+            </ul>
+          </div>
+
+          <!-- CONTACTO -->
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5>Seguinos</h5>
+
+            <div class="d-flex gap-3 mb-3">
+              <a href="#" class="footer-icon">
+                <i class="bi bi-instagram"></i>
+              </a>
+
+              <a href="#" class="footer-icon">
+                <i class="bi bi-facebook"></i>
+              </a>
+
+              <a href="#" class="footer-icon">
+                <i class="bi bi-twitter-x"></i>
+              </a>
+
+              <a href="#" class="footer-icon">
+                <i class="bi bi-discord"></i>
+              </a>
             </div>
+
+            <p class="text-secondary mb-1">soporte@gamestore.com</p>
+
+            <p class="text-secondary">Lun a Vie · 9:00 a 18:00</p>
           </div>
         </div>
 
-        <hr />
+        <hr class="border-secondary" />
 
-        <p class="text-center mb-0">© 2026 Placeholder name</p>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <small class="text-secondary">
+              © 2026 GameStore. Todos los derechos reservados.
+            </small>
+          </div>
+
+          <div class="col-md-6 text-md-end">
+            <small class="text-secondary">
+              <i class="bi bi-credit-card me-1"></i>
+              Visa · Mastercard · PayPal
+            </small>
+          </div>
+        </div>
       </div>
     </footer>
   </body>

@@ -10,8 +10,23 @@
 /* HERO */
 
 #inicio {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 193, 7, 0.15),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(13, 110, 253, 0.15),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #0f172a, #111827, #0b1120);
+
+  color: white;
+
+  padding-top: 100px;
+  padding-bottom: 80px;
 }
 
 /* separacion general */
@@ -98,4 +113,36 @@
 #productos .card-img-top {
   height: 250px;
   object-fit: cover;
+}
+
+/* FOOTER */
+
+#footer {
+  background-color: #111827;
+}
+
+.footer-link {
+  color: #adb5bd;
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.footer-link:hover {
+  color: #ffc107;
+}
+
+.footer-icon {
+  color: white;
+  font-size: 1.4rem;
+
+  transition: 0.2s;
+}
+
+.footer-icon:hover {
+  color: #ffc107;
+}
+
+.footer-icon {
+  text-decoration: none;
 }
