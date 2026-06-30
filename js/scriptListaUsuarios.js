@@ -37,6 +37,7 @@ function crearFila(usuario) {
   fila.appendChild(crearCelda(usuario.edad));
   fila.appendChild(crearCeldaEstado(usuario.habilitado));
   fila.appendChild(crearCeldaAccion(usuario));
+  fila.appendChild(crearCeldaEliminar(usuario));
 
   return fila;
 }
@@ -88,6 +89,33 @@ function crearCeldaAccion(usuario) {
 
   td.appendChild(boton);
   return td;
+}
+
+function crearCeldaEliminar(usuario) {
+  const td = document.createElement("td");
+  const boton = document.createElement("button");
+  const icono = document.createElement("i");
+ 
+  boton.classList.add("btn", "btn-sm", "btn-outline-dark");
+  icono.classList.add("bi", "bi-trash", "me-1");
+ 
+  boton.appendChild(icono);
+  boton.appendChild(document.createTextNode("Eliminar"));
+ 
+  boton.addEventListener("click", () => eliminarUsuario(usuario.id));
+ 
+  td.appendChild(boton);
+  return td;
+}
+
+function eliminarUsuario(id) { 
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+ 
+  const usuariosFiltrados = usuarios.filter((u) => u.id !== id);
+ 
+  localStorage.setItem("usuarios", JSON.stringify(usuariosFiltrados));
+ 
+  crearTabla();
 }
 
 function toggleHabilitado(id) {
