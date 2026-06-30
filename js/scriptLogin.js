@@ -1,0 +1,78 @@
+window.addEventListener("load", inicializar);
+
+function inicializar() {
+  crearAdmin();
+
+  document.getElementById("btnLogin").addEventListener("click", manejarLogin);
+}
+
+function crearAdmin() {
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  const adminExiste = usuarios.some((u) => u.rol === "administrador");
+
+  if (!adminExiste) {
+    const admin = {
+      id: "admin-001",
+      nombre: "admin",
+      password: "admin123",
+      rol: "administrador",
+      habilitado: true,
+    };
+
+    usuarios.push(admin);
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
+}
+
+function manejarLogin() {
+  const inputUsuario = document.getElementById("inputUsuario");
+  const inputPassword = document.getElementById("inputPassword");
+  const mensajeError = document.getElementById("mensajeError");
+
+  const nombre = inputUsuario.value.trim();
+  const password = inputPassword.value.trim();
+
+  mensajeError.classList.add("d-none");
+
+  if (nombre === "" || password === "") {
+    mostrarError(mensajeError, "Completá usuario y contraseña.");
+    return;
+  }
+
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  const usuario = usuarios.find((u) => u.nombre === nombre && u.password === password);
+
+  if (!usuario) {
+    mostrarError(mensajeError, "Usuario o contraseña incorrectos.");
+    return;
+  }
+
+  if (!usuario.habilitado) {
+    mostrarError(mensajeError, "Tu cuenta está deshabilitada.");
+    return;
+  }
+
+  
+  const sesion = {
+    id: usuario.id,
+    nombre: usuario.nombre,
+    rol: usuario.rol,
+  };
+
+  localStorage.setItem("sesionActiva", JSON.stringify(sesion));
+
+
+  if (usuario.rol === "administrador") {
+    window.location.href = "admin/indexAdmin.html";
+  } else {
+    window.location.href = "main.html";
+  }
+}
+
+function mostrarError(elemento, mensaje) {
+  elemento.textContent = mensaje;
+  elemento.classList.remove("d-none");
+}
