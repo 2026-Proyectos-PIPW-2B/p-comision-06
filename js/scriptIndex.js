@@ -248,7 +248,7 @@ function obtenerCarrito() {
 }
 
 function obtenerClaveCarrito() {
-  let sesion = JSON.parse(localStorage.getItem("sesion"));
+  let sesion = JSON.parse(localStorage.getItem("sesionActiva"));
 
-  return "carrito_" + sesion.usuario;
+  return "carrito_" + sesionActiva.nombre;
 }
