@@ -199,7 +199,7 @@ function limpiarFiltros() {
 //CARRITO
 
 function agregarAlCarrito(idProducto) {
-  let sesion = JSON.parse(localStorage.getItem("sesion"));
+  let sesion = JSON.parse(localStorage.getItem("sesionActiva"));
 
   if (sesion == null) {
     alert("Debe iniciar sesión para agregar productos al carrito.");
@@ -250,5 +250,5 @@ function obtenerCarrito() {
 function obtenerClaveCarrito() {
   let sesion = JSON.parse(localStorage.getItem("sesionActiva"));
 
-  return "carrito_" + sesionActiva.nombre;
+  return "carrito_" + sesion.nombre;
 }

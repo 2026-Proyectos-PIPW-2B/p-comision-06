@@ -1,26 +1,12 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>GameStore</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="css/index.css" />
-
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
   </head>
   <body>
     <!-- NAVBAR -->
@@ -31,63 +17,52 @@
           GameStore
         </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#menu"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="menu">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a
-                class="nav-link d-flex align-items-center gap-2"
-                href="login.html"
-              >
+
+            <!-- Visible solo si NO hay sesión -->
+            <li class="nav-item" id="navLogin">
+              <a class="nav-link d-flex align-items-center gap-2" href="login.html">
                 <i class="bi bi-person-circle"></i>
                 Login
               </a>
             </li>
 
-            <li class="nav-item">
-              <a
-                class="nav-link d-flex align-items-center gap-2"
-                href="carrito.html"
-              >
+            <!-- Visible solo si hay sesión de cliente -->
+            <li class="nav-item d-none" id="navCarrito">
+              <a class="nav-link d-flex align-items-center gap-2" href="carrito.html">
                 <i class="bi bi-cart3"></i>
                 Carrito
               </a>
             </li>
 
-            <li class="nav-item">
-              <a
-                class="nav-link d-flex align-items-center gap-2 d-none"
-                href="admin/indexAdmin.html"
-              >
+            <!-- Visible solo si hay sesión de administrador -->
+            <li class="nav-item d-none" id="navAdmin">
+              <a class="nav-link d-flex align-items-center gap-2" href="admin/indexAdmin.html">
                 <i class="bi bi-plus-circle"></i>
-                Administracion
+                Administración
               </a>
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link d-flex align-items-center gap-2 d-none"
-                href="admin/indexAdmin.html"
-              >
-                <i class="bi bi-plus-circle"></i>
-                Cerrar cesion
+
+            <!-- Visible solo si hay sesión activa -->
+            <li class="nav-item d-none" id="navCerrarSesion">
+              <a class="nav-link d-flex align-items-center gap-2" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar sesión
               </a>
             </li>
-            <li class="nav-link d-flex align-items-center gap-2">
-              <button
-                id="btnInicializar"
-                class="btn btn-outline-warning btn-sm"
-              >
+
+            <!-- Siempre visible -->
+            <li class="nav-item">
+              <button id="btnInicializar" class="btn btn-outline-warning btn-sm ms-2">
                 Inicializar datos
               </button>
             </li>
+
           </ul>
         </div>
       </div>
@@ -97,20 +72,11 @@
     <section id="inicio">
       <div class="container-fluid hero-container">
         <div class="row align-items-center">
-          <!-- IZQUIERDA -->
           <div class="col-lg-4 hero-info">
-            <h1 class="display-2 fw-bold mb-4">
-              Tu próxima aventura esta por comenzar
-            </h1>
-
-            <p class="lead mb-4">
-              Miles de videojuegos para PC, PlayStation, Xbox y Nintendo.
-            </p>
-
+            <h1 class="display-2 fw-bold mb-4">Tu próxima aventura esta por comenzar</h1>
+            <p class="lead mb-4">Miles de videojuegos para PC, PlayStation, Xbox y Nintendo.</p>
             <a href="#" class="btn btn-warning btn-lg"> Explorar catálogo </a>
           </div>
-
-          <!-- DERECHA -->
           <div class="col-lg-8">
             <div class="row g-4 justify-content-center">
               <div class="col-md-4">
@@ -123,7 +89,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="col-md-4">
                 <div class="game-banner">
                   <img src="img/er.jpg" alt="" />
@@ -134,7 +99,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="col-md-4">
                 <div class="game-banner">
                   <img src="img/rdr2.jpg" alt="" />
@@ -155,28 +119,16 @@
     <section id="catalogo" class="py-5">
       <div class="container">
         <div class="row">
-          <!-- FILTROS -->
           <aside class="col-lg-3 mb-4">
             <div class="card shadow-sm">
               <div class="card-body">
                 <h4 class="mb-4">Filtros</h4>
-
-                <!-- BUSQUEDA -->
                 <div class="mb-3">
                   <label class="form-label">Buscar juego</label>
-
-                  <input
-                    id="filtroBusqueda"
-                    type="text"
-                    class="form-control"
-                    placeholder="Cyberpunk..."
-                  />
+                  <input id="filtroBusqueda" type="text" class="form-control" placeholder="Cyberpunk..." />
                 </div>
-
-                <!-- GENERO -->
                 <div class="mb-3">
                   <label class="form-label">Género</label>
-
                   <select id="filtroGenero" class="form-select">
                     <option value="Todos">Todos</option>
                     <option value="Acción">Acción</option>
@@ -187,107 +139,47 @@
                     <option value="Deportes">Deportes</option>
                   </select>
                 </div>
-
-                <!-- PLATAFORMAS -->
                 <div class="mb-3">
                   <label class="form-label">Plataforma</label>
-
                   <div class="form-check">
-                    <input
-                      class="form-check-input plataforma"
-                      type="checkbox"
-                      id="pc"
-                      value="PC"
-                    />
-
+                    <input class="form-check-input plataforma" type="checkbox" id="pc" value="PC" />
                     <label class="form-check-label" for="pc"> PC </label>
                   </div>
-
                   <div class="form-check">
-                    <input
-                      class="form-check-input plataforma"
-                      type="checkbox"
-                      id="playstation"
-                      value="PlayStation"
-                    />
-
-                    <label class="form-check-label" for="playstation">
-                      PlayStation
-                    </label>
+                    <input class="form-check-input plataforma" type="checkbox" id="playstation" value="PlayStation" />
+                    <label class="form-check-label" for="playstation"> PlayStation </label>
                   </div>
-
                   <div class="form-check">
-                    <input
-                      class="form-check-input plataforma"
-                      type="checkbox"
-                      id="xbox"
-                      value="Xbox"
-                    />
-
+                    <input class="form-check-input plataforma" type="checkbox" id="xbox" value="Xbox" />
                     <label class="form-check-label" for="xbox"> Xbox </label>
                   </div>
-
                   <div class="form-check">
-                    <input
-                      class="form-check-input plataforma"
-                      type="checkbox"
-                      id="nintendo"
-                      value="Nintendo"
-                    />
-
-                    <label class="form-check-label" for="nintendo">
-                      Nintendo
-                    </label>
+                    <input class="form-check-input plataforma" type="checkbox" id="nintendo" value="Nintendo" />
+                    <label class="form-check-label" for="nintendo"> Nintendo </label>
                   </div>
                 </div>
-
-                <!-- PRECIO -->
                 <div class="mb-3">
                   <label class="form-label">Precio</label>
-
                   <div class="row g-2">
                     <div class="col">
-                      <input
-                        id="filtroPrecioMin"
-                        type="number"
-                        class="form-control"
-                        placeholder="Min"
-                      />
+                      <input id="filtroPrecioMin" type="number" class="form-control" placeholder="Min" />
                     </div>
-
                     <div class="col">
-                      <input
-                        id="filtroPrecioMax"
-                        type="number"
-                        class="form-control"
-                        placeholder="Max"
-                      />
+                      <input id="filtroPrecioMax" type="number" class="form-control" placeholder="Max" />
                     </div>
                   </div>
                 </div>
-
-                <button id="btnAplicarFiltros" class="btn btn-warning w-100">
-                  Aplicar filtros
-                </button>
-
-                <button
-                  id="btnLimpiarFiltros"
-                  class="btn btn-outline-secondary w-100 mt-2"
-                >
-                  Limpiar filtros
-                </button>
+                <button id="btnAplicarFiltros" class="btn btn-warning w-100">Aplicar filtros</button>
+                <button id="btnLimpiarFiltros" class="btn btn-outline-secondary w-100 mt-2">Limpiar filtros</button>
               </div>
             </div>
           </aside>
 
-          <!-- PRODUCTOS -->
           <div class="col-lg-9">
             <div class="d-flex justify-content-between align-items-center mb-4">
               <h2 class="fw-bold mb-0">Catálogo</h2>
-
               <span class="text-muted"> Productos disponibles </span>
             </div>
-
             <div id="contenedorCatalogo" class="row g-4"></div>
           </div>
         </div>
@@ -300,22 +192,13 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <h3 class="fw-bold mb-2">No te pierdas ninguna oferta</h3>
-
-            <p class="mb-lg-0">
-              Recibí descuentos, lanzamientos y promociones exclusivas.
-            </p>
+            <p class="mb-lg-0">Recibí descuentos, lanzamientos y promociones exclusivas.</p>
           </div>
-
           <div class="col-lg-6">
             <form class="row g-2">
               <div class="col-md-8">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="tuemail@ejemplo.com"
-                />
+                <input type="email" class="form-control" placeholder="tuemail@ejemplo.com" />
               </div>
-
               <div class="col-md-4">
                 <button class="btn btn-dark w-100">Suscribirme</button>
               </div>
@@ -329,46 +212,24 @@
     <footer id="footer" class="text-white pt-5 pb-3">
       <div class="container">
         <div class="row">
-          <!-- MARCA -->
           <div class="col-lg-3 col-md-6 mb-4">
             <h4 class="fw-bold">
               <i class="bi bi-controller me-2"></i>
               GameStore
             </h4>
-
-            <p class="text-secondary">
-              Tu tienda digital de videojuegos para PC, PlayStation, Xbox y
-              Nintendo.
-            </p>
+            <p class="text-secondary">Tu tienda digital de videojuegos para PC, PlayStation, Xbox y Nintendo.</p>
           </div>
-
-          <!-- NAVEGACION -->
           <div class="col-lg-3 col-md-6 mb-4">
             <h5>Navegación</h5>
-
             <ul class="list-unstyled">
-              <li>
-                <a href="#inicio" class="footer-link"> Inicio </a>
-              </li>
-
-              <li>
-                <a href="#catalogo" class="footer-link"> Catálogo </a>
-              </li>
-
-              <li>
-                <a href="login.html" class="footer-link"> Login </a>
-              </li>
-
-              <li>
-                <a href="carrito.html" class="footer-link"> Carrito </a>
-              </li>
+              <li><a href="#inicio" class="footer-link"> Inicio </a></li>
+              <li><a href="#catalogo" class="footer-link"> Catálogo </a></li>
+              <li><a href="login.html" class="footer-link"> Login </a></li>
+              <li><a href="carrito.html" class="footer-link"> Carrito </a></li>
             </ul>
           </div>
-
-          <!-- CATEGORIAS -->
           <div class="col-lg-3 col-md-6 mb-4">
             <h5>Categorías</h5>
-
             <ul class="list-unstyled">
               <li>Acción</li>
               <li>RPG</li>
@@ -377,44 +238,23 @@
               <li>Indie</li>
             </ul>
           </div>
-
-          <!-- CONTACTO -->
           <div class="col-lg-3 col-md-6 mb-4">
             <h5>Seguinos</h5>
-
             <div class="d-flex gap-3 mb-3">
-              <a href="#" class="footer-icon">
-                <i class="bi bi-instagram"></i>
-              </a>
-
-              <a href="#" class="footer-icon">
-                <i class="bi bi-facebook"></i>
-              </a>
-
-              <a href="#" class="footer-icon">
-                <i class="bi bi-twitter-x"></i>
-              </a>
-
-              <a href="#" class="footer-icon">
-                <i class="bi bi-discord"></i>
-              </a>
+              <a href="#" class="footer-icon"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="footer-icon"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="footer-icon"><i class="bi bi-discord"></i></a>
             </div>
-
             <p class="text-secondary mb-1">soporte@gamestore.com</p>
-
             <p class="text-secondary">Lun a Vie · 9:00 a 18:00</p>
           </div>
         </div>
-
         <hr class="border-secondary" />
-
         <div class="row align-items-center">
           <div class="col-md-6">
-            <small class="text-secondary">
-              © 2026 GameStore. Todos los derechos reservados.
-            </small>
+            <small class="text-secondary">© 2026 GameStore. Todos los derechos reservados.</small>
           </div>
-
           <div class="col-md-6 text-md-end">
             <small class="text-secondary">
               <i class="bi bi-credit-card me-1"></i>
@@ -425,12 +265,10 @@
       </div>
     </footer>
 
-    <!-- Validator.JS-->
     <script src="https://cdn.jsdelivr.net/npm/validator@13.15.35/validator.min.js"></script>
-
-    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scriptNavbar.js"></script>
     <script src="js/scriptIndex.js"></script>
     <script src="js/scriptInicializarDatos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
