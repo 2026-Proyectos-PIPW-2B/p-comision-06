@@ -38,31 +38,17 @@ function obtenerProductos() {
 //catalogo
 
 function cargarCatalogo() {
-  renderizarProductos(obtenerProductos());
-}
+  let productos = obtenerProductos();
 
-function renderizarProductos(productos) {
-  const contenedor = document.getElementById("contenedorCatalogo");
+  let productosDisponibles = [];
 
-  if (!contenedor) return;
-
-  contenedor.innerHTML = "";
-
-  if (productos.length === 0) {
-    contenedor.innerHTML = `
-      <div class="col-12">
-        <div class="alert alert-warning">
-          No se encontraron productos.
-        </div>
-      </div>
-    `;
-
-    return;
+  for (let i = 0; i < productos.length; i++) {
+    if (productos[i].stock > 0) {
+      productosDisponibles.push(productos[i]);
+    }
   }
 
-  productos.forEach((producto) => {
-    contenedor.innerHTML += crearCardProducto(producto);
-  });
+  renderizarProductos(productosDisponibles);
 }
 
 //cards
@@ -168,6 +154,16 @@ function aplicarFiltros() {
 
   renderizarProductos(productos);
 }
+
+function renderizarProductos(productos) {
+  let contenedor = document.getElementById("contenedorCatalogo");
+
+  contenedor.innerHTML = "";
+
+  for (let i = 0; i < productos.length; i++) {
+    contenedor.innerHTML += crearCardProducto(productos[i]);
+  }
+}
 function obtenerPlataformasSeleccionadas() {
   let plataformas = [];
 
@@ -191,7 +187,7 @@ function limpiarFiltros() {
 
   document.getElementById("filtroPrecioMax").value = "";
 
-  document.querySelectorAll(".filtro-plataforma").forEach((checkbox) => {
+  document.querySelectorAll(".plataforma").forEach((checkbox) => {
     checkbox.checked = false;
   });
 
@@ -205,7 +201,20 @@ function agregarAlCarrito(idProducto) {
 
   if (sesion == null) {
     alert("Debe iniciar sesión para agregar productos al carrito.");
+    return;
+  }
 
+  let productos = obtenerProductos();
+  let producto = null;
+
+  for (let i = 0; i < productos.length; i++) {
+    if (productos[i].id == idProducto) {
+      producto = productos[i];
+    }
+  }
+
+  if (producto == null) {
+    alert("Producto no encontrado.");
     return;
   }
   if (sesion.rol === "administrador") {
@@ -220,15 +229,23 @@ function agregarAlCarrito(idProducto) {
 
   for (let i = 0; i < carrito.length; i++) {
     if (carrito[i].idProducto == idProducto) {
+      if (carrito[i].cantidad >= producto.stock) {
+        alert("No hay más unidades disponibles.");
+        return;
+      }
+
       carrito[i].cantidad++;
-
       encontrado = true;
-
       break;
     }
   }
 
   if (!encontrado) {
+    if (producto.stock <= 0) {
+      alert("Producto sin stock.");
+      return;
+    }
+
     carrito.push({
       idProducto: idProducto,
       cantidad: 1,
@@ -245,6 +262,10 @@ function agregarAlCarrito(idProducto) {
 function obtenerCarrito() {
   let clave = obtenerClaveCarrito();
 
+  if (clave == null) {
+    return [];
+  }
+
   let carrito = JSON.parse(localStorage.getItem(clave));
 
   if (carrito == null) {
@@ -256,6 +277,10 @@ function obtenerCarrito() {
 
 function obtenerClaveCarrito() {
   let sesion = JSON.parse(localStorage.getItem("sesionActiva"));
+
+  if (sesion == null) {
+    return null;
+  }
 
   return "carrito_" + sesion.nombre;
 }
