@@ -6,159 +6,103 @@
 
     <title>Carrito</title>
 
-    <link rel="stylesheet" href="css/main.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
+
+    <link rel="stylesheet" href="css/main.css" />
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body class="bg-light">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="main.html">Game Store</a>
+        <a class="navbar-brand fw-bold" href="main.html"> GameStore </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#menu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="menu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="main.html">
-                <i class="bi bi-grid"></i>
-                Catálogo
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2 active" href="carrito.html">
-                <i class="bi bi-cart3"></i>
-                Carrito
-                <span id="carritoContador" class="badge bg-warning text-dark">2</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#" id="btnCerrarSesion">
-                <i class="bi bi-box-arrow-right"></i>
-                Cerrar sesión
-              </a>
-            </li>
-          </ul>
+        <div class="ms-auto">
+          <a href="main.html" class="btn btn-outline-light">
+            <i class="bi bi-arrow-left"></i>
+            Volver al catálogo
+          </a>
         </div>
       </div>
     </nav>
 
-    <main class="flex-grow-1">
-
-      <section class="carrito-section py-5 mt-5">
-        <div class="container">
-
-          <h2 class="fw-bold mb-4">
-            <i class="bi bi-cart3 me-2"></i>
-            Mi carrito
-          </h2>
-
-          <div id="carritoContenido">
-            <div class="table-responsive">
-              <table class="table table-dark table-borderless table-hover align-middle">
-                <thead>
-                  <tr>
-                    <th>Juego</th>
-                    <th>Precio</th>
-                    <th class="text-center">Cantidad</th>
-                    <th class="text-end">Subtotal</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="carritoTabla">
-                    <tr>
-                        <td>Cyberpunk 2077</td>
-                        <td>$59.99</td>
-                        <td class="align-middle">
-                          <div class="d-flex justify-content-center">
-                            <input type="number" class="form-control form-control-sm text-center w-50" min="1" value="1">
-                          </div>
-                        </td>
-                        <td>$59.99</td>
-                        <td>
-                          <button class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>Elden Ring</td>
-                        <td>$69.99</td>
-                        <td class="align-middle">
-                          <div class="d-flex justify-content-center">
-                            <input type="number" class="form-control form-control-sm text-center w-50" min="1" value="1">
-                          </div>
-                        </td>
-                        <td>$139.98</td>
-                        <td>
-                          <button class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                </tbody>
-              </table>
+    <main class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card shadow border-0">
+            <div class="card-header bg-dark text-white">
+              <h2 class="mb-0">
+                <i class="bi bi-cart3 me-2"></i>
+                Mi carrito
+              </h2>
             </div>
 
-    
-            <div class="d-flex justify-content-end align-items-center gap-4 mt-3 flex-wrap">
-              <div class="text-end">
-                <p class="text-muted mb-0 small">Total</p>
-                <h3 class="fw-bold text-warning mb-0" id="carritoTotal">$199.97</h3>
+            <div class="card-body">
+              <!-- Carrito vacío -->
+              <div id="carritoVacio" class="alert alert-warning d-none">
+                No hay productos en el carrito.
               </div>
-              <button id="btnConfirmar" class="btn btn-warning btn-lg fw-bold">
-                <i class="bi bi-bag-check me-2"></i>
-                Confirmar pedido
-              </button>
+
+              <!-- Tabla -->
+              <div id="contenedorCarrito">
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>Juego</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody id="tablaCarrito"></tbody>
+                  </table>
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-6"></div>
+
+                  <div class="col-md-6">
+                    <div class="card bg-light">
+                      <div class="card-body">
+                        <h5>Total del pedido</h5>
+
+                        <h2 id="totalCarrito" class="text-warning fw-bold">
+                          $0
+                        </h2>
+
+                        <button
+                          id="btnFinalizarCompra"
+                          class="btn btn-warning w-100 mt-3"
+                        >
+                          <i class="bi bi-bag-check"></i>
+                          Finalizar compra
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="mensajeCompra" class="alert alert-success mt-4 d-none">
+                Compra realizada correctamente.
+              </div>
             </div>
           </div>
-
-          <div id="carritoVacio" class="text-center py-5 d-none">
-            <i class="bi bi-cart-x fs-1 text-muted mb-3 d-block"></i>
-            <h5 class="text-muted">Tu carrito está vacío</h5>
-            <a href="#" class="btn btn-warning mt-3">
-              <i class="bi bi-grid me-2"></i>
-              Ver catálogo
-            </a>
-          </div>
-
-          <div id="pedidoConfirmado" class="alert alert-success d-none mt-4">
-            <i class="bi bi-check-circle me-2"></i>
-            ¡Pedido confirmado! Gracias por tu compra.
-          </div>
-
         </div>
-      </section>
-    </main>
-   
-
-    <!-- FOOTER -->
-    <footer class="bg-dark text-white py-4">
-      <div class="container">
-        <p class="text-center mb-0">© 2026 Game Store</p>
       </div>
-    </footer>
+    </main>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="js/scriptCarrito.js"></script>
   </body>
 </html>
