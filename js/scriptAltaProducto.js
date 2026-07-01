@@ -13,14 +13,21 @@ function validarFormulario(event) {
 
   let valido = true;
 
-  const nombre = document.getElementById("nombre");
-  const descripcion = document.getElementById("descripcion");
-  const precio = document.getElementById("precio");
-  const genero = document.getElementById("genero");
-  const stock = document.getElementById("stock");
-  const imagen = document.getElementById("imagen");
+  valido = validarNombre() && valido;
+  valido = validarDescripcion() && valido;
+  valido = validarPrecio() && valido;
+  valido = validarGenero() && valido;
+  valido = validarStock() && valido;
+  valido = validarImagen() && valido;
+  valido = validarPlataformas() && valido;
 
-  // NOMBRE
+  if (valido) {
+    guardarProducto();
+  }
+}
+
+function validarNombre() {
+  let nombre = document.getElementById("nombre");
 
   if (
     validator.isEmpty(nombre.value.trim()) ||
@@ -29,12 +36,22 @@ function validarFormulario(event) {
       max: 100,
     })
   ) {
-    mostrarError(nombre, "El nombre debe tener entre 3 y 100 caracteres.");
+    mostrarMensaje(
+      nombre,
+      "errorNombre",
+      "El nombre debe tener entre 3 y 100 caracteres.",
+    );
 
-    valido = false;
+    return false;
   }
 
-  // DESCRIPCION
+  mostrarExito(nombre);
+
+  return true;
+}
+
+function validarDescripcion() {
+  let descripcion = document.getElementById("descripcion");
 
   if (
     validator.isEmpty(descripcion.value.trim()) ||
@@ -43,15 +60,22 @@ function validarFormulario(event) {
       max: 500,
     })
   ) {
-    mostrarError(
+    mostrarMensaje(
       descripcion,
+      "errorDescripcion",
       "La descripción debe tener entre 20 y 500 caracteres.",
     );
 
-    valido = false;
+    return false;
   }
 
-  // PRECIO
+  mostrarExito(descripcion);
+
+  return true;
+}
+
+function validarPrecio() {
+  let precio = document.getElementById("precio");
 
   if (
     validator.isEmpty(precio.value) ||
@@ -59,20 +83,32 @@ function validarFormulario(event) {
       min: 0.01,
     })
   ) {
-    mostrarError(precio, "Ingrese un precio válido.");
+    mostrarMensaje(precio, "errorPrecio", "Ingrese un precio válido.");
 
-    valido = false;
+    return false;
   }
 
-  // GENERO
+  mostrarExito(precio);
+
+  return true;
+}
+
+function validarGenero() {
+  let genero = document.getElementById("genero");
 
   if (genero.value === "") {
-    mostrarError(genero, "Seleccione un género.");
+    mostrarMensaje(genero, "errorGenero", "Seleccione un género.");
 
-    valido = false;
+    return false;
   }
 
-  // STOCK
+  mostrarExito(genero);
+
+  return true;
+}
+
+function validarStock() {
+  let stock = document.getElementById("stock");
 
   if (
     validator.isEmpty(stock.value) ||
@@ -80,53 +116,155 @@ function validarFormulario(event) {
       min: 0,
     })
   ) {
-    mostrarError(stock, "Ingrese un stock válido.");
+    mostrarMensaje(stock, "errorStock", "Ingrese un stock válido.");
 
-    valido = false;
+    return false;
   }
 
-  // IMAGEN
+  mostrarExito(stock);
 
-  if (imagen.files.length === 0) {
-    mostrarError(imagen, "Debe seleccionar una imagen.");
+  return true;
+}
 
-    valido = false;
+function validarImagen() {
+  let imagen = document.getElementById("imagen");
+
+  if (validator.isEmpty(imagen.value.trim())) {
+    mostrarMensaje(imagen, "errorImagen", "Ingrese la ruta de la imagen.");
+
+    return false;
   }
 
-  // PLATAFORMAS
+  mostrarExito(imagen);
 
-  const plataformasSeleccionadas = document.querySelectorAll(
-    ".plataforma:checked",
-  );
+  return true;
+}
 
-  if (plataformasSeleccionadas.length === 0) {
+function validarPlataformas() {
+  let plataformas = obtenerPlataformas();
+
+  if (plataformas.length === 0) {
     document.getElementById("errorPlataformas").textContent =
       "Seleccione al menos una plataforma.";
 
-    valido = false;
+    return false;
   }
 
-  if (valido) {
-    alert("Producto registrado correctamente.");
+  return true;
+}
 
-    document.getElementById("formAltaProducto").reset();
+function obtenerPlataformas() {
+  let plataformas = [];
+
+  let checkboxes = document.getElementsByClassName("plataforma");
+
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      plataformas.push(checkboxes[i].value);
+    }
+  }
+
+  return plataformas;
+}
+
+//guardadp
+
+function guardarProducto() {
+  let producto = obtenerProductoFormulario();
+
+  agregarProducto(producto);
+
+  alert("Producto registrado correctamente.");
+
+  limpiarFormulario();
+}
+
+function obtenerProductoFormulario() {
+  let producto = {
+    id: Date.now(),
+
+    nombre: document.getElementById("nombre").value.trim(),
+
+    descripcion: document.getElementById("descripcion").value.trim(),
+
+    precio: parseFloat(document.getElementById("precio").value),
+
+    genero: document.getElementById("genero").value,
+
+    stock: parseInt(document.getElementById("stock").value),
+
+    plataformas: obtenerPlataformas(),
+
+    imagen: document.getElementById("imagen").value.trim(),
+  };
+
+  return producto;
+}
+
+function obtenerProductos() {
+  let productos = JSON.parse(localStorage.getItem("productos"));
+
+  if (productos == null) {
+    productos = [];
+  }
+
+  return productos;
+}
+
+function agregarProducto(producto) {
+  let productos = obtenerProductos();
+
+  productos.push(producto);
+
+  localStorage.setItem("productos", JSON.stringify(productos));
+}
+
+//limpieza y mesnsajes feedback
+
+function limpiarFormulario() {
+  document.getElementById("formAltaProducto").reset();
+
+  limpiarErrores();
+
+  let camposValidos = document.getElementsByClassName("is-valid");
+
+  while (camposValidos.length > 0) {
+    camposValidos[0].classList.remove("is-valid");
   }
 }
 
-function mostrarError(campo, mensaje) {
-  campo.classList.add("is-invalid");
+function mostrarMensaje(input, idDivError, mensaje) {
+  input.classList.remove("is-valid");
 
-  campo.nextElementSibling.textContent = mensaje;
+  input.classList.add("is-invalid");
+
+  document.getElementById(idDivError).textContent = mensaje;
+}
+
+function mostrarExito(input) {
+  input.classList.remove("is-invalid");
+
+  input.classList.add("is-valid");
 }
 
 function limpiarErrores() {
-  document.querySelectorAll(".is-invalid").forEach((campo) => {
-    campo.classList.remove("is-invalid");
-  });
+  let camposInvalidos = document.getElementsByClassName("is-invalid");
 
-  document.querySelectorAll(".invalid-feedback").forEach((error) => {
-    error.textContent = "";
-  });
+  while (camposInvalidos.length > 0) {
+    camposInvalidos[0].classList.remove("is-invalid");
+  }
+
+  document.getElementById("errorNombre").textContent = "";
+
+  document.getElementById("errorDescripcion").textContent = "";
+
+  document.getElementById("errorPrecio").textContent = "";
+
+  document.getElementById("errorGenero").textContent = "";
+
+  document.getElementById("errorStock").textContent = "";
+
+  document.getElementById("errorImagen").textContent = "";
 
   document.getElementById("errorPlataformas").textContent = "";
 }
