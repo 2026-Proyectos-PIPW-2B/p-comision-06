@@ -190,8 +190,59 @@ function limpiarFiltros() {
 
 //CARRITO
 
-function agregarAlCarrito(id) {
-  alert("Producto agregado al carrito (pendiente)");
+function agregarAlCarrito(idProducto) {
+  let sesion = JSON.parse(localStorage.getItem("sesion"));
+
+  if (sesion == null) {
+    alert("Debe iniciar sesión para agregar productos al carrito.");
+
+    return;
+  }
+
+  let carrito = obtenerCarrito();
+
+  let encontrado = false;
+
+  for (let i = 0; i < carrito.length; i++) {
+    if (carrito[i].idProducto == idProducto) {
+      carrito[i].cantidad++;
+
+      encontrado = true;
+
+      break;
+    }
+  }
+
+  if (!encontrado) {
+    carrito.push({
+      idProducto: idProducto,
+      cantidad: 1,
+    });
+  }
+
+  let clave = obtenerClaveCarrito();
+
+  localStorage.setItem(clave, JSON.stringify(carrito));
+
+  alert("Producto agregado al carrito.");
+}
+
+function obtenerCarrito() {
+  let clave = obtenerClaveCarrito();
+
+  let carrito = JSON.parse(localStorage.getItem(clave));
+
+  if (carrito == null) {
+    carrito = [];
+  }
+
+  return carrito;
+}
+
+function obtenerClaveCarrito() {
+  let sesion = JSON.parse(localStorage.getItem("sesion"));
+
+  return "carrito_" + sesion.usuario;
 }
 
 //catalogo temp
