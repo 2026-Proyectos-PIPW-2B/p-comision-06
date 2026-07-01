@@ -119,36 +119,20 @@ function crearCardProducto(producto) {
 function aplicarFiltros() {
   let productos = obtenerProductos();
 
-  const texto = document
+  let texto = document
     .getElementById("filtroBusqueda")
     .value.trim()
     .toLowerCase();
 
-  const genero = document.getElementById("filtroGenero").value;
+  let genero = document.getElementById("filtroGenero").value;
 
-  const precioMin = parseFloat(
-    document.getElementById("filtroPrecioMin").value,
-  );
+  let precioMin = parseFloat(document.getElementById("filtroPrecioMin").value);
 
-  const precioMax = parseFloat(
-    document.getElementById("filtroPrecioMax").value,
-  );
+  let precioMax = parseFloat(document.getElementById("filtroPrecioMax").value);
 
-  function obtenerPlataformas() {
-    let plataformas = [];
+  let plataformasSeleccionadas = obtenerPlataformasSeleccionadas();
 
-    let checkboxes = document.getElementsByClassName("plataforma");
-
-    for (let i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].checked) {
-        plataformas.push(checkboxes[i].value);
-      }
-    }
-
-    return plataformas;
-  }
-
-  productos = productos.filter((producto) => {
+  productos = productos.filter(function (producto) {
     if (texto !== "" && !producto.nombre.toLowerCase().includes(texto)) {
       return false;
     }
@@ -165,19 +149,37 @@ function aplicarFiltros() {
       return false;
     }
 
-    if (
-      plataformasSeleccionadas.length > 0 &&
-      !plataformasSeleccionadas.some((plataforma) =>
-        producto.plataformas.includes(plataforma),
-      )
-    ) {
-      return false;
+    if (plataformasSeleccionadas.length > 0) {
+      let coincide = false;
+
+      for (let i = 0; i < plataformasSeleccionadas.length; i++) {
+        if (producto.plataformas.includes(plataformasSeleccionadas[i])) {
+          coincide = true;
+        }
+      }
+
+      if (!coincide) {
+        return false;
+      }
     }
 
     return true;
   });
 
   renderizarProductos(productos);
+}
+function obtenerPlataformasSeleccionadas() {
+  let plataformas = [];
+
+  let checkboxes = document.getElementsByClassName("plataforma");
+
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      plataformas.push(checkboxes[i].value);
+    }
+  }
+
+  return plataformas;
 }
 
 function limpiarFiltros() {
