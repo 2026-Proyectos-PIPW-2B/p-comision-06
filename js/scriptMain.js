@@ -1,7 +1,6 @@
 window.addEventListener("load", inicializar);
 
 function inicializar() {
-  cargarProductosDemo();
   cargarCatalogo();
 
   const btnAplicar = document.getElementById("btnAplicarFiltros");
@@ -23,9 +22,7 @@ function obtenerProductos() {
   return JSON.parse(localStorage.getItem("productos")) || [];
 }
 
-function guardarProductos(productos) {
-  localStorage.setItem("productos", JSON.stringify(productos));
-}
+
 
 //catalogo
 
@@ -245,45 +242,3 @@ function obtenerClaveCarrito() {
   return "carrito_" + sesion.usuario;
 }
 
-//catalogo temp
-
-function cargarProductosDemo() {
-  if (localStorage.getItem("productos")) {
-    return;
-  }
-
-  const demo = [
-    {
-      id: 1,
-      nombre: "Cyberpunk 2077",
-      descripcion: "RPG futurista",
-      precio: 39.99,
-      genero: "RPG",
-      plataformas: ["PC"],
-      stock: 20,
-      imagen: "cyberpunk.jpg",
-    },
-    {
-      id: 2,
-      nombre: "Elden Ring",
-      descripcion: "Soulslike",
-      precio: 49.99,
-      genero: "RPG",
-      plataformas: ["PC", "PS5"],
-      stock: 15,
-      imagen: "er.jpg",
-    },
-    {
-      id: 3,
-      nombre: "Red Dead Redemption 2",
-      descripcion: "Western",
-      precio: 29.99,
-      genero: "Aventura",
-      plataformas: ["PC"],
-      stock: 30,
-      imagen: "rdr2.jpg",
-    },
-  ];
-
-  guardarProductos(demo);
-}
