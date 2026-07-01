@@ -21,7 +21,9 @@ function manejarLogin() {
 
   const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-  const usuario = usuarios.find((u) => u.nombre === nombre && u.password === password);
+  const usuario = usuarios.find(
+    (u) => u.nombre === nombre && u.password === password,
+  );
 
   if (!usuario) {
     mostrarError(mensajeError, "Usuario o contraseña incorrectos.");
@@ -33,7 +35,6 @@ function manejarLogin() {
     return;
   }
 
-  
   const sesion = {
     id: usuario.id,
     nombre: usuario.nombre,
@@ -42,11 +43,10 @@ function manejarLogin() {
 
   localStorage.setItem("sesionActiva", JSON.stringify(sesion));
 
-
   if (usuario.rol === "administrador") {
     window.location.href = "admin/indexAdmin.html";
   } else {
-    window.location.href = "main.html";
+    window.location.href = "index.html";
   }
 }
 

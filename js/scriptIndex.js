@@ -2,6 +2,7 @@ window.addEventListener("load", inicializar);
 
 function inicializar() {
   cargarCatalogo();
+  mostrarBotonAdministracion();
 
   const btnAplicar = document.getElementById("btnAplicarFiltros");
 
@@ -16,13 +17,23 @@ function inicializar() {
   }
 }
 
+function mostrarBotonAdministracion() {
+  let sesion = JSON.parse(localStorage.getItem("sesionActiva"));
+
+  if (sesion && sesion.rol === "administrador") {
+    const btnAdmin = document.getElementById("btnAdmin");
+
+    if (btnAdmin) {
+      btnAdmin.classList.remove("d-none");
+    }
+  }
+}
+
 //LS
 
 function obtenerProductos() {
   return JSON.parse(localStorage.getItem("productos")) || [];
 }
-
-
 
 //catalogo
 
@@ -241,4 +252,3 @@ function obtenerClaveCarrito() {
 
   return "carrito_" + sesion.usuario;
 }
-
