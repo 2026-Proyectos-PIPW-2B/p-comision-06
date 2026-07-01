@@ -1,29 +1,7 @@
 window.addEventListener("load", inicializar);
 
 function inicializar() {
-  crearAdmin();
-
   document.getElementById("btnLogin").addEventListener("click", manejarLogin);
-}
-
-function crearAdmin() {
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-  const adminExiste = usuarios.some((u) => u.rol === "administrador");
-
-  if (!adminExiste) {
-    const admin = {
-      id: "admin-001",
-      nombre: "admin",
-      password: "admin123",
-      rol: "administrador",
-      habilitado: true,
-    };
-
-    usuarios.push(admin);
-
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-  }
 }
 
 function manejarLogin() {
