@@ -17,9 +17,7 @@ function inicializar() {
   }
 }
 
-/* =========================
-   STORAGE
-========================= */
+//LS
 
 function obtenerProductos() {
   return JSON.parse(localStorage.getItem("productos")) || [];
@@ -29,9 +27,7 @@ function guardarProductos(productos) {
   localStorage.setItem("productos", JSON.stringify(productos));
 }
 
-/* =========================
-   CATALOGO
-========================= */
+//catalogo
 
 function cargarCatalogo() {
   renderizarProductos(obtenerProductos());
@@ -61,9 +57,7 @@ function renderizarProductos(productos) {
   });
 }
 
-/* =========================
-   CARDS
-========================= */
+//cards
 
 function crearCardProducto(producto) {
   return `
