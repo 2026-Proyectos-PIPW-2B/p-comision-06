@@ -9,13 +9,29 @@ function inicializar() {
 }
 
 function obtenerCarrito() {
-  let carrito = JSON.parse(localStorage.getItem("carrito"));
+  let clave = obtenerClaveCarrito();
+
+  if (clave == null) {
+    return [];
+  }
+
+  let carrito = JSON.parse(localStorage.getItem(clave));
 
   if (carrito == null) {
     carrito = [];
   }
 
   return carrito;
+}
+
+function obtenerClaveCarrito() {
+  let sesion = JSON.parse(localStorage.getItem("sesionActiva"));
+
+  if (sesion == null) {
+    return null;
+  }
+
+  return "carrito_" + sesion.nombre;
 }
 
 function obtenerProductos() {
@@ -163,7 +179,9 @@ function actualizarCantidad(idProducto, nuevaCantidad) {
     }
   }
 
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+  let clave = obtenerClaveCarrito();
+
+  localStorage.setItem(clave, JSON.stringify(carrito));
 
   cargarCarrito();
 }
@@ -179,7 +197,9 @@ function eliminarDelCarrito(idProducto) {
     }
   }
 
-  localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+  let clave = obtenerClaveCarrito();
+
+  localStorage.setItem(clave, JSON.stringify(nuevoCarrito));
 
   cargarCarrito();
 }
@@ -205,7 +225,7 @@ function calcularTotal() {
 function guardarCompra(carrito, total) {
   let historial = obtenerHistorial();
 
-  let sesion = JSON.parse(localStorage.getItem("sesion"));
+  let sesion = JSON.parse(localStorage.getItem("sesionActiva"));
 
   let compra = {
     idCompra: Date.now(),
@@ -258,7 +278,9 @@ function finalizarCompra() {
 
   descontarStock(carrito);
 
-  localStorage.removeItem("carrito");
+  let clave = obtenerClaveCarrito();
+
+  localStorage.removeItem(clave);
 
   document.getElementById("mensajeCompra").classList.remove("d-none");
 
