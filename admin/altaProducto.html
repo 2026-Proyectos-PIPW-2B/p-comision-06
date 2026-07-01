@@ -40,6 +40,7 @@
 
             <div class="card-body">
               <form id="formAltaProducto" novalidate>
+                <!-- NOMBRE -->
                 <div class="mb-3">
                   <label for="nombre" class="form-label">
                     Nombre del videojuego
@@ -47,9 +48,10 @@
 
                   <input type="text" class="form-control" id="nombre" />
 
-                  <div class="invalid-feedback"></div>
+                  <div id="errorNombre" class="invalid-feedback"></div>
                 </div>
 
+                <!-- DESCRIPCION -->
                 <div class="mb-3">
                   <label for="descripcion" class="form-label">
                     Descripción
@@ -61,17 +63,23 @@
                     rows="4"
                   ></textarea>
 
-                  <div class="invalid-feedback"></div>
+                  <div id="errorDescripcion" class="invalid-feedback"></div>
                 </div>
 
+                <!-- PRECIO Y STOCK -->
                 <div class="row">
                   <div class="col-md-6">
                     <div class="mb-3">
                       <label for="precio" class="form-label"> Precio </label>
 
-                      <input type="number" class="form-control" id="precio" />
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="precio"
+                        step="0.01"
+                      />
 
-                      <div class="invalid-feedback"></div>
+                      <div id="errorPrecio" class="invalid-feedback"></div>
                     </div>
                   </div>
 
@@ -81,28 +89,35 @@
 
                       <input type="number" class="form-control" id="stock" />
 
-                      <div class="invalid-feedback"></div>
+                      <div id="errorStock" class="invalid-feedback"></div>
                     </div>
                   </div>
                 </div>
 
+                <!-- GENERO -->
                 <div class="mb-3">
                   <label for="genero" class="form-label"> Género </label>
 
                   <select class="form-select" id="genero">
                     <option value="">Seleccione un género</option>
 
-                    <option>Acción</option>
-                    <option>RPG</option>
-                    <option>Shooter</option>
-                    <option>Aventura</option>
-                    <option>Estrategia</option>
-                    <option>Deportes</option>
+                    <option value="Acción">Acción</option>
+
+                    <option value="RPG">RPG</option>
+
+                    <option value="Shooter">Shooter</option>
+
+                    <option value="Aventura">Aventura</option>
+
+                    <option value="Estrategia">Estrategia</option>
+
+                    <option value="Deportes">Deportes</option>
                   </select>
 
-                  <div class="invalid-feedback"></div>
+                  <div id="errorGenero" class="invalid-feedback"></div>
                 </div>
 
+                <!-- PLATAFORMAS -->
                 <div class="mb-3">
                   <label class="form-label"> Plataformas </label>
 
@@ -111,6 +126,7 @@
                       class="form-check-input plataforma"
                       type="checkbox"
                       id="pc"
+                      value="PC"
                     />
 
                     <label class="form-check-label" for="pc"> PC </label>
@@ -121,6 +137,7 @@
                       class="form-check-input plataforma"
                       type="checkbox"
                       id="playstation"
+                      value="PlayStation"
                     />
 
                     <label class="form-check-label" for="playstation">
@@ -133,6 +150,7 @@
                       class="form-check-input plataforma"
                       type="checkbox"
                       id="xbox"
+                      value="Xbox"
                     />
 
                     <label class="form-check-label" for="xbox"> Xbox </label>
@@ -143,6 +161,7 @@
                       class="form-check-input plataforma"
                       type="checkbox"
                       id="nintendo"
+                      value="Nintendo"
                     />
 
                     <label class="form-check-label" for="nintendo">
@@ -153,19 +172,27 @@
                   <small id="errorPlataformas" class="text-danger"></small>
                 </div>
 
+                <!-- IMAGEN -->
                 <div class="mb-4">
-                  <label for="imagen" class="form-label"> Imagen </label>
+                  <label for="imagen" class="form-label">
+                    Ruta de imagen
+                  </label>
 
                   <input
-                    type="file"
+                    type="text"
                     class="form-control"
                     id="imagen"
-                    accept="image/*"
+                    placeholder="img/eldenring.jpg"
                   />
 
-                  <div class="invalid-feedback"></div>
+                  <div id="errorImagen" class="invalid-feedback"></div>
+
+                  <div class="form-text">
+                    Ingrese la ruta relativa de la imagen dentro del proyecto.
+                  </div>
                 </div>
 
+                <!-- BOTONES -->
                 <div class="d-flex justify-content-end gap-2">
                   <button type="reset" class="btn btn-outline-secondary">
                     Limpiar
