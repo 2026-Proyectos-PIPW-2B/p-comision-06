@@ -167,6 +167,14 @@ function buscarProducto(idProducto, productos) {
 function actualizarCantidad(idProducto, nuevaCantidad) {
   nuevaCantidad = parseInt(nuevaCantidad);
 
+  let productos = obtenerProductos();
+  let producto = buscarProducto(idProducto, productos);
+
+  if (nuevaCantidad > producto.stock) {
+    alert("No hay suficiente stock.");
+    nuevaCantidad = producto.stock;
+  }
+
   if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
     nuevaCantidad = 1;
   }
@@ -179,9 +187,7 @@ function actualizarCantidad(idProducto, nuevaCantidad) {
     }
   }
 
-  let clave = obtenerClaveCarrito();
-
-  localStorage.setItem(clave, JSON.stringify(carrito));
+  localStorage.setItem(obtenerClaveCarrito(), JSON.stringify(carrito));
 
   cargarCarrito();
 }
