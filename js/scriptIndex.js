@@ -208,6 +208,11 @@ function agregarAlCarrito(idProducto) {
 
     return;
   }
+  if (sesion.rol === "administrador") {
+    alert("Los administradores no pueden agregar productos al carrito.");
+
+    return;
+  }
 
   let carrito = obtenerCarrito();
 

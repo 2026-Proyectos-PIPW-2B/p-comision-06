@@ -12,7 +12,9 @@ function crearTabla() {
 
   cuerpo.innerHTML = "";
 
-  if (usuarios.length === 0) {
+  const usuariosFinales = usuarios.filter((u) => u.rol !== "administrador");
+
+  if (usuariosFinales.length === 0) {
     sinUsuarios.classList.remove("d-none");
     tabla.classList.add("d-none");
     return;
@@ -21,7 +23,7 @@ function crearTabla() {
   sinUsuarios.classList.add("d-none");
   tabla.classList.remove("d-none");
 
-  usuarios.forEach((usuario) => {
+  usuariosFinales.forEach((usuario) => {
     const fila = crearFila(usuario);
     cuerpo.appendChild(fila);
   });
@@ -30,8 +32,7 @@ function crearTabla() {
 function crearFila(usuario) {
   const fila = document.createElement("tr");
 
-  fila.appendChild(crearCelda(usuario.id));
-  fila.appendChild(crearCelda(usuario.nombreUsuario));
+  fila.appendChild(crearCelda(usuario.nombre));
   fila.appendChild(crearCelda(usuario.nombrePersona + " " + usuario.apellido));
   fila.appendChild(crearCelda(usuario.email));
   fila.appendChild(crearCelda(usuario.edad));
