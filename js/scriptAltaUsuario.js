@@ -129,7 +129,7 @@ function guardarUsuario(nombre, password, email, nombrePersona, apellido, edad) 
 
   const nuevoUsuario = {
     id: "user-" + Date.now(),
-    nombreUsuario: nombre.value.trim(),
+    nombre: nombre.value.trim(),
     password: password.value,
     email: email.value.trim(),
     nombrePersona: nombrePersona.value.trim(),
