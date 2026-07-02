@@ -2,48 +2,49 @@ document.getElementById("btnInicializar").addEventListener("click", () => {
   crearAdmin();
   crearUsuario();
   crearProductos();
+  cargarCatalogo();
 });
 
 function crearAdmin() {
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    const adminExiste = usuarios.some((u) => u.rol === "administrador");
+  const adminExiste = usuarios.some((u) => u.rol === "administrador");
 
-    if (!adminExiste) {
-        const admin = {
-        id: Date.now(),
-        nombre: "administrador",
-        password: "administrador",
-        rol: "administrador",
-        habilitado: true,
-        };
+  if (!adminExiste) {
+    const admin = {
+      id: 101,
+      nombre: "administrador",
+      password: "administrador",
+      rol: "administrador",
+      habilitado: true,
+    };
 
-        usuarios.push(admin);
+    usuarios.push(admin);
 
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    }
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
 }
 
 function crearUsuario() {
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    const existe = usuarios.some((u) => u.nombre === "usuario");
+  const existe = usuarios.some((u) => u.nombre === "usuario");
 
-    if (!existe) {
-        usuarios.push({
-        id: Date.now(),
-        nombre: "usuario",
-        password: "usuario",
-        email: "usuario@test.com",
-        nombrePersona: "Usuario",
-        apellido: "Prueba",
-        edad: 20,
-        rol: "usuario",
-        habilitado: true,
-        });
+  if (!existe) {
+    usuarios.push({
+      id: 102,
+      nombre: "usuario",
+      password: "usuario",
+      email: "usuario@test.com",
+      nombrePersona: "Usuario",
+      apellido: "Prueba",
+      edad: 20,
+      rol: "usuario",
+      habilitado: true,
+    });
 
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    }
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
 }
 
 function crearProductos() {

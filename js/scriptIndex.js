@@ -54,50 +54,58 @@ function cargarCatalogo() {
 //cards
 
 function crearCardProducto(producto) {
-  return `
-    <div class="col-md-6 col-xl-4">
+  let columna = document.createElement("div");
+  columna.classList.add("col-md-6", "col-xl-4");
 
-      <div class="card h-100 shadow-sm">
+  let card = document.createElement("div");
+  card.classList.add("card", "h-100", "shadow-sm");
 
-        <img
-          src="img/${producto.imagen}"
-          class="card-img-top"
-          alt="${producto.nombre}"
-          style="height:250px; object-fit:cover;"
-        >
+  let imagen = document.createElement("img");
+  imagen.src = "img/" + producto.imagen;
+  imagen.alt = producto.nombre;
+  imagen.classList.add("card-img-top");
+  imagen.style.height = "250px";
+  imagen.style.objectFit = "cover";
 
-        <div class="card-body d-flex flex-column">
+  let body = document.createElement("div");
+  body.classList.add("card-body", "d-flex", "flex-column");
 
-          <h5 class="card-title">
-            ${producto.nombre}
-          </h5>
+  let titulo = document.createElement("h5");
+  titulo.classList.add("card-title");
+  titulo.textContent = producto.nombre;
 
-          <p class="text-muted">
-            ${producto.genero}
-          </p>
+  let genero = document.createElement("p");
+  genero.classList.add("text-muted");
+  genero.textContent = producto.genero;
 
-          <h4 class="text-warning">
-            USD ${producto.precio}
-          </h4>
+  let precio = document.createElement("h4");
+  precio.classList.add("text-warning");
+  precio.textContent = "USD " + producto.precio;
 
-          <p>
-            Stock: ${producto.stock}
-          </p>
+  let stock = document.createElement("p");
+  stock.textContent = "Stock: " + producto.stock;
 
-          <button
-            class="btn btn-dark mt-auto"
-            onclick="agregarAlCarrito(${producto.id})"
-          >
-            <i class="bi bi-cart-plus"></i>
-            Agregar al carrito
-          </button>
+  let boton = document.createElement("button");
+  boton.classList.add("btn", "btn-dark", "mt-auto");
 
-        </div>
+  boton.innerHTML = '<i class="bi bi-cart-plus"></i> Agregar al carrito';
 
-      </div>
+  boton.addEventListener("click", function () {
+    agregarAlCarrito(producto.id);
+  });
 
-    </div>
-  `;
+  body.appendChild(titulo);
+  body.appendChild(genero);
+  body.appendChild(precio);
+  body.appendChild(stock);
+  body.appendChild(boton);
+
+  card.appendChild(imagen);
+  card.appendChild(body);
+
+  columna.appendChild(card);
+
+  return columna;
 }
 
 //FILTROS
@@ -158,12 +166,13 @@ function aplicarFiltros() {
 function renderizarProductos(productos) {
   let contenedor = document.getElementById("contenedorCatalogo");
 
-  contenedor.innerHTML = "";
+  contenedor.textContent = "";
 
   for (let i = 0; i < productos.length; i++) {
-    contenedor.innerHTML += crearCardProducto(productos[i]);
+    contenedor.appendChild(crearCardProducto(productos[i]));
   }
 }
+
 function obtenerPlataformasSeleccionadas() {
   let plataformas = [];
 
