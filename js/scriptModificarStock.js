@@ -18,82 +18,92 @@ function cargarTabla() {
   let productos = obtenerProductos();
 
   let tabla = document.getElementById("tablaProductos");
-
-  tabla.innerHTML = "";
+  tabla.textContent = "";
 
   for (let i = 0; i < productos.length; i++) {
     let producto = productos[i];
 
-    tabla.innerHTML += `
-      <tr>
+    let fila = document.createElement("tr");
 
-        <td>${producto.id}</td>
+    // ID
+    let tdId = document.createElement("td");
+    tdId.textContent = producto.id;
+    fila.appendChild(tdId);
 
-        <td>
-          <input
-            type="text"
-            class="form-control"
-            id="nombre-${producto.id}"
-            value="${producto.nombre}"
-          >
-        </td>
+    // Nombre
+    let tdNombre = document.createElement("td");
+    let inputNombre = document.createElement("input");
+    inputNombre.type = "text";
+    inputNombre.classList.add("form-control");
+    inputNombre.id = `nombre-${producto.id}`;
+    inputNombre.value = producto.nombre;
+    tdNombre.appendChild(inputNombre);
+    fila.appendChild(tdNombre);
 
-        <td>
-          <input
-            type="number"
-            class="form-control"
-            id="precio-${producto.id}"
-            value="${producto.precio}"
-          >
-        </td>
+    // Precio
+    let tdPrecio = document.createElement("td");
+    let inputPrecio = document.createElement("input");
+    inputPrecio.type = "number";
+    inputPrecio.classList.add("form-control");
+    inputPrecio.id = `precio-${producto.id}`;
+    inputPrecio.value = producto.precio;
+    tdPrecio.appendChild(inputPrecio);
+    fila.appendChild(tdPrecio);
 
-        <td>
-          <input
-            type="text"
-            class="form-control"
-            id="genero-${producto.id}"
-            value="${producto.genero}"
-          >
-        </td>
+    // genero
+    let tdGenero = document.createElement("td");
+    let inputGenero = document.createElement("input");
+    inputGenero.type = "text";
+    inputGenero.classList.add("form-control");
+    inputGenero.id = `genero-${producto.id}`;
+    inputGenero.value = producto.genero;
+    tdGenero.appendChild(inputGenero);
+    fila.appendChild(tdGenero);
 
-        <td>
-          <input
-            type="number"
-            class="form-control"
-            id="stock-${producto.id}"
-            value="${producto.stock}"
-          >
-        </td>
+    // Stock
+    let tdStock = document.createElement("td");
+    let inputStock = document.createElement("input");
+    inputStock.type = "number";
+    inputStock.classList.add("form-control");
+    inputStock.id = `stock-${producto.id}`;
+    inputStock.value = producto.stock;
+    tdStock.appendChild(inputStock);
+    fila.appendChild(tdStock);
 
-        <td>
-          <input
-            type="text"
-            class="form-control"
-            id="imagen-${producto.id}"
-            value="${producto.imagen}"
-          >
-        </td>
+    // Imagen
+    let tdImagen = document.createElement("td");
+    let inputImagen = document.createElement("input");
+    inputImagen.type = "text";
+    inputImagen.classList.add("form-control");
+    inputImagen.id = `imagen-${producto.id}`;
+    inputImagen.value = producto.imagen;
+    tdImagen.appendChild(inputImagen);
+    fila.appendChild(tdImagen);
 
-        <td>
+    // Acciones
+    let tdAcciones = document.createElement("td");
 
-          <button
-            class="btn btn-success btn-sm"
-            onclick="guardarCambios(${producto.id})"
-          >
-            <i class="bi bi-floppy"></i>
-          </button>
+    let btnGuardar = document.createElement("button");
+    btnGuardar.classList.add("btn", "btn-success", "btn-sm");
+    btnGuardar.innerHTML = '<i class="bi bi-floppy"></i>';
+    btnGuardar.addEventListener("click", function () {
+      guardarCambios(producto.id);
+    });
 
-          <button
-            class="btn btn-danger btn-sm"
-            onclick="eliminarProducto(${producto.id})"
-          >
-            <i class="bi bi-trash"></i>
-          </button>
+    let btnEliminar = document.createElement("button");
+    btnEliminar.classList.add("btn", "btn-danger", "btn-sm");
+    btnEliminar.innerHTML = '<i class="bi bi-trash"></i>';
+    btnEliminar.addEventListener("click", function () {
+      eliminarProducto(producto.id);
+    });
 
-        </td>
+    tdAcciones.appendChild(btnGuardar);
+    tdAcciones.appendChild(document.createTextNode(" "));
+    tdAcciones.appendChild(btnEliminar);
 
-      </tr>
-    `;
+    fila.appendChild(tdAcciones);
+
+    tabla.appendChild(fila);
   }
 }
 

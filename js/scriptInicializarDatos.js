@@ -11,7 +11,7 @@ function crearAdmin() {
 
     if (!adminExiste) {
         const admin = {
-        id: Date.now(),
+        id: 101,
         nombre: "administrador",
         password: "administrador",
         rol: "administrador",
@@ -31,7 +31,7 @@ function crearUsuario() {
 
     if (!existe) {
         usuarios.push({
-        id: Date.now(),
+        id: 102,
         nombre: "usuario",
         password: "usuario",
         email: "usuario@test.com",
