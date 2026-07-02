@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GameStore</title>
     <link rel="stylesheet" href="css/index.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
   </head>
   <body>
     <!-- NAVBAR -->
@@ -17,16 +23,23 @@
           GameStore
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="menu">
           <ul class="navbar-nav ms-auto">
-
             <!-- Visible solo si NO hay sesión -->
             <li class="nav-item" id="navLogin">
-              <a class="nav-link d-flex align-items-center gap-2" href="login.html">
+              <a
+                class="nav-link d-flex align-items-center gap-2"
+                href="login.html"
+              >
                 <i class="bi bi-person-circle"></i>
                 Login
               </a>
@@ -34,7 +47,10 @@
 
             <!-- Visible solo si hay sesión de cliente -->
             <li class="nav-item d-none" id="navCarrito">
-              <a class="nav-link d-flex align-items-center gap-2" href="carrito.html">
+              <a
+                class="nav-link d-flex align-items-center gap-2"
+                href="carrito.html"
+              >
                 <i class="bi bi-cart3"></i>
                 Carrito
               </a>
@@ -42,7 +58,10 @@
 
             <!-- Visible solo si hay sesión de administrador -->
             <li class="nav-item d-none" id="navAdmin">
-              <a class="nav-link d-flex align-items-center gap-2" href="admin/indexAdmin.html">
+              <a
+                class="nav-link d-flex align-items-center gap-2"
+                href="admin/indexAdmin.html"
+              >
                 <i class="bi bi-plus-circle"></i>
                 Administración
               </a>
@@ -58,11 +77,13 @@
 
             <!-- Siempre visible -->
             <li class="nav-item">
-              <button id="btnInicializar" class="btn btn-outline-warning btn-sm ms-2">
+              <button
+                id="btnInicializar"
+                class="btn btn-outline-warning btn-sm ms-2"
+              >
                 Inicializar datos
               </button>
             </li>
-
           </ul>
         </div>
       </div>
@@ -73,8 +94,12 @@
       <div class="container-fluid hero-container">
         <div class="row align-items-center">
           <div class="col-lg-4 hero-info">
-            <h1 class="display-2 fw-bold mb-4">Tu próxima aventura esta por comenzar</h1>
-            <p class="lead mb-4">Miles de videojuegos para PC, PlayStation, Xbox y Nintendo.</p>
+            <h1 class="display-2 fw-bold mb-4">
+              Tu próxima aventura esta por comenzar
+            </h1>
+            <p class="lead mb-4">
+              Miles de videojuegos para PC, PlayStation, Xbox y Nintendo.
+            </p>
             <a href="#" class="btn btn-warning btn-lg"> Explorar catálogo </a>
           </div>
           <div class="col-lg-8">
@@ -125,7 +150,12 @@
                 <h4 class="mb-4">Filtros</h4>
                 <div class="mb-3">
                   <label class="form-label">Buscar juego</label>
-                  <input id="filtroBusqueda" type="text" class="form-control" placeholder="Cyberpunk..." />
+                  <input
+                    id="filtroBusqueda"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre..."
+                  />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Género</label>
@@ -142,30 +172,64 @@
                 <div class="mb-3">
                   <label class="form-label">Plataforma</label>
                   <div class="form-check">
-                    <input class="form-check-input plataforma" type="checkbox" id="pc" value="PC" />
+                    <input
+                      class="form-check-input plataforma"
+                      type="checkbox"
+                      id="pc"
+                      value="PC"
+                    />
                     <label class="form-check-label" for="pc"> PC </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input plataforma" type="checkbox" id="playstation" value="PlayStation" />
-                    <label class="form-check-label" for="playstation"> PlayStation </label>
+                    <input
+                      class="form-check-input plataforma"
+                      type="checkbox"
+                      id="playstation"
+                      value="PlayStation"
+                    />
+                    <label class="form-check-label" for="playstation">
+                      PlayStation
+                    </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input plataforma" type="checkbox" id="xbox" value="Xbox" />
+                    <input
+                      class="form-check-input plataforma"
+                      type="checkbox"
+                      id="xbox"
+                      value="Xbox"
+                    />
                     <label class="form-check-label" for="xbox"> Xbox </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input plataforma" type="checkbox" id="nintendo" value="Nintendo" />
-                    <label class="form-check-label" for="nintendo"> Nintendo </label>
+                    <input
+                      class="form-check-input plataforma"
+                      type="checkbox"
+                      id="nintendo"
+                      value="Nintendo"
+                    />
+                    <label class="form-check-label" for="nintendo">
+                      Nintendo
+                    </label>
                   </div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Precio</label>
                   <div class="row g-2">
                     <div class="col">
-                      <input id="filtroPrecioMin" type="number" class="form-control" placeholder="Min" />
+                      <input
+                        id="filtroPrecioMin"
+                        type="number"
+                        class="form-control"
+                        placeholder="Min"
+                      />
                     </div>
                     <div class="col">
-                      <input id="filtroPrecioMax" type="number" class="form-control" placeholder="Max" />
+                      <input
+                        id="filtroPrecioMax"
+                        type="number"
+                        class="form-control"
+                        placeholder="Max"
+                      />
                     </div>
                   </div>
                 </div>
@@ -206,12 +270,18 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <h3 class="fw-bold mb-2">No te pierdas ninguna oferta</h3>
-            <p class="mb-lg-0">Recibí descuentos, lanzamientos y promociones exclusivas.</p>
+            <p class="mb-lg-0">
+              Recibí descuentos, lanzamientos y promociones exclusivas.
+            </p>
           </div>
           <div class="col-lg-6">
             <form class="row g-2">
               <div class="col-md-8">
-                <input type="email" class="form-control" placeholder="tuemail@ejemplo.com" />
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="tuemail@ejemplo.com"
+                />
               </div>
               <div class="col-md-4">
                 <button class="btn btn-dark w-100">Suscribirme</button>
@@ -231,7 +301,10 @@
               <i class="bi bi-controller me-2"></i>
               GameStore
             </h4>
-            <p class="text-secondary">Tu tienda digital de videojuegos para PC, PlayStation, Xbox y Nintendo.</p>
+            <p class="text-secondary">
+              Tu tienda digital de videojuegos para PC, PlayStation, Xbox y
+              Nintendo.
+            </p>
           </div>
           <div class="col-lg-3 col-md-6 mb-4">
             <h5>Navegación</h5>
@@ -255,9 +328,13 @@
           <div class="col-lg-3 col-md-6 mb-4">
             <h5>Seguinos</h5>
             <div class="d-flex gap-3 mb-3">
-              <a href="#" class="footer-icon"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="footer-icon"
+                ><i class="bi bi-instagram"></i
+              ></a>
               <a href="#" class="footer-icon"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="footer-icon"
+                ><i class="bi bi-twitter-x"></i
+              ></a>
               <a href="#" class="footer-icon"><i class="bi bi-discord"></i></a>
             </div>
             <p class="text-secondary mb-1">soporte@gamestore.com</p>
@@ -267,7 +344,9 @@
         <hr class="border-secondary" />
         <div class="row align-items-center">
           <div class="col-md-6">
-            <small class="text-secondary">© 2026 GameStore. Todos los derechos reservados.</small>
+            <small class="text-secondary"
+              >© 2026 GameStore. Todos los derechos reservados.</small
+            >
           </div>
           <div class="col-md-6 text-md-end">
             <small class="text-secondary">
